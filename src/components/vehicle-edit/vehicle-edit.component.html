@@ -1,0 +1,116 @@
+<div class="div-edit-vehicle">
+  <h2>Edição de Veículo</h2>
+  <form class="vehicle-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field class="vehicle-full-width">
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="brand">
+          @for (brand of brands; track brand) {
+          <mat-option [value]="brand.value">{{ brand.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="editForm.controls['brand'].errors?.['required']"
+          >Campo obrigatório</mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="vehicle-full-width">
+        <mat-label>Modelo</mat-label>
+        <input
+          matInput
+          formControlName="model"
+          placeholder="Digite o modelo do veículo"
+        />
+        <mat-error *ngIf="editForm.controls['model'].errors?.['required']"
+          >Campo obrigatório</mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="vehicle-full-width">
+        <mat-label>Ano</mat-label>
+        <input
+          matInput
+          #year
+          type="number"
+          min="1950"
+          max="2024"
+          formControlName="year"
+          placeholder="Digite o ano do veículo"
+        />
+        <mat-hint>{{ year.value.length }} / 4</mat-hint>
+        <mat-error *ngIf="editForm.controls['year'].errors?.['required']"
+          >Campo obrigatório</mat-error
+        >
+        <mat-error
+          *ngIf="editForm.controls['year'].errors?.['max'] || editForm.controls['year'].errors?.['min']"
+          >O ano deve estar entre 1950 e 2024</mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="vehicle-full-width">
+        <mat-label>Placa</mat-label>
+        <input
+          matInput
+          #licensePlate
+          maxlength="7"
+          formControlName="licensePlate"
+          placeholder="Digite a placa do veículo"
+        />
+        <mat-hint>{{ licensePlate.value.length }} / 7</mat-hint>
+        <mat-error
+          *ngIf="editForm.controls['licensePlate'].errors?.['required']"
+          >Campo obrigatório</mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="vehicle-full-width">
+        <mat-label>Chassi</mat-label>
+        <input
+          matInput
+          #chassi
+          maxlength="17"
+          formControlName="chassi"
+          placeholder="Digite o chassi do veículo"
+        />
+        <mat-hint>{{ chassi.value.length }} / 17</mat-hint>
+        <mat-error *ngIf="editForm.controls['chassi'].errors?.['required']"
+          >Campo obrigatório</mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="vehicle-full-width">
+        <mat-label>Renavam</mat-label>
+        <input
+          matInput
+          #renavam
+          maxlength="11"
+          formControlName="renavam"
+          placeholder="Digite o renavam do veículo"
+        />
+        <mat-hint>{{ renavam.value.length }} / 11</mat-hint>
+        <mat-error *ngIf="editForm.controls['renavam'].errors?.['required']"
+          >Campo obrigatório</mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <div class="form-buttons">
+      <button mat-raised-button color="primary" type="submit">
+        Atualizar Veículo
+      </button>
+      <button mat-raised-button color="secondary" type="button" (click)="openCancelDialog('0ms', '0ms')">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
